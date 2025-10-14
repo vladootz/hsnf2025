@@ -174,8 +174,13 @@ export default {
 </script>
 
 <style>
-.current-day {
-  background-color: rgba(55, 65, 81, 0.3);
+.grid.gap-6 > .mb-6.current-day {
+  background-color: rgba(55, 65, 81, 0.75);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+.grid.gap-6 > .mb-6 {
+  background-color: rgba(55, 65, 81, 0.15);
   border-radius: 0.5rem;
   padding: 0.5rem;
 }
