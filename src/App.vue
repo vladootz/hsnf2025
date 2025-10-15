@@ -238,6 +238,7 @@ export default {
 
     // Toggle demo mode
     const toggleDemo = () => {
+      window.scrollTo(0,0);
       demoMode.value = !demoMode.value
       if (demoMode.value) {
         demoDay.value = generateDemoEvents()
@@ -351,6 +352,9 @@ export default {
 </script>
 
 <style>
+html {
+  scroll-behavior: smooth;
+}
 .grid.gap-6 > .mb-6.current-day {
   background-color: rgba(55, 65, 81, 0.75);
   border-radius: 0.5rem;
