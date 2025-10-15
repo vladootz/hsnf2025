@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-900 text-gray-100">
     <header class="bg-blue-950 text-white p-4">
       <div class="container mx-auto flex justify-between items-center flex-wrap gap-2">
-        <h1 class="text-2xl font-bold">Hiroshima Setouchi Nomad Fest 2025</h1>
+        <h1 class="text-xl font-bold">Hiroshima Setouchi Nomad Fest 2025</h1>
         <div class="hidden md:flex gap-2">
           <button
             @click="showNowOnly = !showNowOnly"
@@ -34,21 +34,46 @@
 
     <!-- Mobile bottom button bar -->
     <div
-      :class="['md:hidden fixed bottom-0 left-0 right-0 bg-blue-700/95 backdrop-blur-sm p-3 flex gap-2 z-50 transition-all duration-300', buttonAlignment === 'left' ? 'justify-start' : 'justify-end']"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-blue-950 backdrop-blur-sm p-3 z-50 mobile-bar"
       style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));"
     >
-      <button
-        @click="showNowOnly = !showNowOnly"
-        :class="['px-3 py-2 rounded text-sm', showNowOnly ? 'bg-green-600' : 'bg-blue-800 hover:bg-blue-700']"
-      >
-        {{ nowButtonText }}
-      </button>
-      <button
-        @click="toggleDemo"
-        :class="['px-3 py-2 rounded text-sm', demoMode ? 'bg-purple-600' : 'bg-blue-800 hover:bg-blue-700']"
-      >
-        Demo
-      </button>
+      <div class="relative w-full flex items-center">
+        <!-- Left arrow -->
+        <button
+          v-show="buttonAlignment === 'right'"
+          @click="toggleAlignment"
+          class="arrow-btn absolute left-0 px-2 py-2 text-gray-300 hover:text-white text-xl"
+          aria-label="Move buttons left"
+        >
+          ←
+        </button>
+
+        <!-- Button group that slides -->
+        <div :class="['button-group flex gap-2', buttonAlignment === 'left' ? 'align-left' : 'align-right']">
+          <button
+            @click="showNowOnly = !showNowOnly"
+            :class="['px-3 py-2 rounded text-sm', showNowOnly ? 'bg-green-600' : 'bg-blue-800 hover:bg-blue-700']"
+          >
+            {{ nowButtonText }}
+          </button>
+          <button
+            @click="toggleDemo"
+            :class="['px-3 py-2 rounded text-sm', demoMode ? 'bg-purple-600' : 'bg-blue-800 hover:bg-blue-700']"
+          >
+            Demo
+          </button>
+        </div>
+
+        <!-- Right arrow -->
+        <button
+          v-show="buttonAlignment === 'left'"
+          @click="toggleAlignment"
+          class="arrow-btn absolute right-0 px-2 py-2 text-gray-300 hover:text-white text-xl"
+          aria-label="Move buttons right"
+        >
+          →
+        </button>
+      </div>
     </div>
 
     <main class="container mx-auto px-4 py-8 md:pb-8 pb-20">
@@ -160,54 +185,21 @@ export default {
     // Update current time every 2 seconds to keep button text reactive
     let timeUpdateInterval = null
 
-    // Handle device orientation for tilt-based button positioning
-    const handleOrientation = (event) => {
-      // gamma is the left-to-right tilt in degrees (-90 to 90)
-      // Negative = tilted left, Positive = tilted right
-      const tiltThreshold = 10 // Degrees threshold to avoid jitter
-
-      if (event.gamma !== null) {
-        if (event.gamma < -tiltThreshold) {
-          buttonAlignment.value = 'left'
-        } else if (event.gamma > tiltThreshold) {
-          buttonAlignment.value = 'right'
-        }
-        // If between -15 and 15, keep current alignment (dead zone to prevent jitter)
-      }
-    }
-
-    // Request permission for iOS 13+ devices
-    const requestOrientationPermission = async () => {
-      if (typeof DeviceOrientationEvent !== 'undefined' &&
-          typeof DeviceOrientationEvent.requestPermission === 'function') {
-        try {
-          const permission = await DeviceOrientationEvent.requestPermission()
-          if (permission === 'granted') {
-            window.addEventListener('deviceorientation', handleOrientation)
-          }
-        } catch (error) {
-          console.log('Orientation permission denied or not available')
-        }
-      } else {
-        // Not iOS 13+ or permission not required
-        window.addEventListener('deviceorientation', handleOrientation)
-      }
+    // Toggle button alignment between left and right
+    const toggleAlignment = () => {
+      buttonAlignment.value = buttonAlignment.value === 'right' ? 'left' : 'right'
     }
 
     onMounted(() => {
       timeUpdateInterval = setInterval(() => {
         currentTime.value = new Date().getTime()
       }, 2000)
-
-      // Set up device orientation listener
-      requestOrientationPermission()
     })
 
     onBeforeUnmount(() => {
       if (timeUpdateInterval) {
         clearInterval(timeUpdateInterval)
       }
-      window.removeEventListener('deviceorientation', handleOrientation)
     })
 
     // Generate demo events function
@@ -351,7 +343,8 @@ export default {
       nowButtonText,
       demoMode,
       toggleDemo,
-      buttonAlignment
+      buttonAlignment,
+      toggleAlignment
     }
   }
 }
@@ -437,5 +430,28 @@ export default {
 .event-card {
   position: relative;
   transition: all 0.3s ease;
+}
+
+/* Mobile button bar animations */
+.mobile-bar .button-group {
+  transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+}
+
+/* Buttons slide right when aligned right */
+.mobile-bar .button-group.align-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* Buttons slide left when aligned left */
+.mobile-bar .button-group.align-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Arrows fade in/out */
+.mobile-bar .arrow-btn {
+  transition: opacity 0.2s ease;
 }
 </style>
