@@ -33,24 +33,15 @@
     </header>
 
     <!-- Mobile bottom button bar -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-blue-700/95 backdrop-blur-sm p-3 flex gap-2 justify-end z-50" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
+    <div
+      :class="['md:hidden fixed bottom-0 left-0 right-0 bg-blue-700/95 backdrop-blur-sm p-3 flex gap-2 z-50 transition-all duration-300', buttonAlignment === 'left' ? 'justify-start' : 'justify-end']"
+      style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));"
+    >
       <button
         @click="showNowOnly = !showNowOnly"
         :class="['px-3 py-2 rounded text-sm', showNowOnly ? 'bg-green-600' : 'bg-blue-800 hover:bg-blue-700']"
       >
         {{ nowButtonText }}
-      </button>
-      <button
-        @click="columnsView = 3"
-        :class="['px-3 py-2 rounded text-sm', columnsView === 3 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
-      >
-        3 Col
-      </button>
-      <button
-        @click="columnsView = 5"
-        :class="['px-3 py-2 rounded text-sm', columnsView === 5 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
-      >
-        5 Col
       </button>
       <button
         @click="toggleDemo"
@@ -164,19 +155,59 @@ export default {
     const currentTime = ref(new Date().getTime())
     const demoMode = ref(false)
     const demoDay = ref(null)
+    const buttonAlignment = ref('right') // Default to right
 
     // Update current time every 2 seconds to keep button text reactive
     let timeUpdateInterval = null
+
+    // Handle device orientation for tilt-based button positioning
+    const handleOrientation = (event) => {
+      // gamma is the left-to-right tilt in degrees (-90 to 90)
+      // Negative = tilted left, Positive = tilted right
+      const tiltThreshold = 15 // Degrees threshold to avoid jitter
+
+      if (event.gamma !== null) {
+        if (event.gamma < -tiltThreshold) {
+          buttonAlignment.value = 'left'
+        } else if (event.gamma > tiltThreshold) {
+          buttonAlignment.value = 'right'
+        }
+        // If between -15 and 15, keep current alignment (dead zone to prevent jitter)
+      }
+    }
+
+    // Request permission for iOS 13+ devices
+    const requestOrientationPermission = async () => {
+      if (typeof DeviceOrientationEvent !== 'undefined' &&
+          typeof DeviceOrientationEvent.requestPermission === 'function') {
+        try {
+          const permission = await DeviceOrientationEvent.requestPermission()
+          if (permission === 'granted') {
+            window.addEventListener('deviceorientation', handleOrientation)
+          }
+        } catch (error) {
+          console.log('Orientation permission denied or not available')
+        }
+      } else {
+        // Not iOS 13+ or permission not required
+        window.addEventListener('deviceorientation', handleOrientation)
+      }
+    }
+
     onMounted(() => {
       timeUpdateInterval = setInterval(() => {
         currentTime.value = new Date().getTime()
       }, 2000)
+
+      // Set up device orientation listener
+      requestOrientationPermission()
     })
 
     onBeforeUnmount(() => {
       if (timeUpdateInterval) {
         clearInterval(timeUpdateInterval)
       }
+      window.removeEventListener('deviceorientation', handleOrientation)
     })
 
     // Generate demo events function
@@ -319,7 +350,8 @@ export default {
       isCurrentOrFirstDay,
       nowButtonText,
       demoMode,
-      toggleDemo
+      toggleDemo,
+      buttonAlignment
     }
   }
 }
