@@ -7,12 +7,9 @@
           "time": "1:00 PM",
           "title": "Community Lunch (No registration required)",
           "description": "If you arrive in Hiroshima early, come to co-ba hiroshima, drop off your luggage, and join us for lunch!",
-          "actions": [
-            {
-              "text": "🗾 Location",
-              "link": "https://share.google/pOrqvA8lPIGxuGkDH"
-            }
-          ]
+          "actions": [],
+          "startTime": "2025-10-18T13:00:00+09:00",
+          "endTime": "2025-10-18T15:00:00+09:00"
         },
         {
           "time": "3:00 PM",
@@ -27,12 +24,14 @@
               "text": "🗾 Location",
               "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
-          ]
+          ],
+          "startTime": "2025-10-18T15:00:00+09:00",
+          "endTime": "2025-10-18T16:00:00+09:00"
         },
         {
           "time": "4:00 PM",
           "title": "Orientation & Family Meeting (Pass Holders Only)",
-          "description": "Introductions, icebreakers, schedule overview, activity discussion, and 3-minute pitches.\n🗾 co-ba hiroshima\n💰 Pass Holders Only: Free",
+          "description": "Introductions, icebreakers, schedule overview, activity discussion, and 2-minute pitches.\n🗾 co-ba hiroshima\n💰 Pass Holders Only: Free",
           "actions": [
             {
               "text": "💸 Book Here",
@@ -42,12 +41,14 @@
               "text": "🗾 Location",
               "link": "https://maps.app.goo.gl/Drkriw3mjsyRv2p29"
             }
-          ]
+          ],
+          "startTime": "2025-10-18T16:00:00+09:00",
+          "endTime": "2025-10-18T18:30:00+09:00"
         },
         {
           "time": "6:30 PM",
           "title": "Welcome Dinner",
-          "description": "Connect and socialize with other participants.\n🗾 Carp-dori Nakanotana Stadium (カープ鳥 中の棚スタジアム店)\n💰 Pass Holders: USD 35 / Non-pass Holders: USD 50",
+          "description": "Connect and socialize with other participants. Course with all-you-can-drink option.\n\n🗾 Carp-dori Nakanotana Stadium (カープ鳥 中の棚スタジアム店)\n\n💰 Pass Holders: USD 35 / Non-pass Holders: USD 50",
           "actions": [
             {
               "text": "💸 Book Here",
@@ -57,7 +58,9 @@
               "text": "🗾 Location",
               "link": "https://share.google/NEKClY40TB9e5JIcy"
             }
-          ]
+          ],
+          "startTime": "2025-10-18T18:30:00+09:00",
+          "endTime": "2025-10-18T20:30:00+09:00"
         }
       ],
       "registrationDeadline": "October 16 (Thu)"
@@ -109,8 +112,14 @@
             {
               "text": "💸 Book Here",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only%e3%80%91oct-20-630pm-new-moon-yoga/"
+            },
+            {
+              "text": "🗾 Location",
+              "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
-          ]
+          ],
+          "startTime": "2025-10-20T18:30:00+09:00",
+          "endTime": "2025-10-20T20:30:00+09:00"
         }
       ]
     },
@@ -125,19 +134,31 @@
             {
               "text": "💸 Book Here",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-21-4pm-biancas-workshop/"
+            },
+            {
+              "text": "🗾 Location",
+              "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
-          ]
+          ],
+          "startTime": "2025-10-21T16:00:00+09:00",
+          "endTime": "2025-10-21T18:00:00+09:00"
         },
         {
           "time": "6:00 PM",
           "title": "Pizza & Anime Night",
-          "description": "💰 Pass Holders: USD 10 / Non-pass Holders: USD 25",
+          "description": "Enjoy pizza while watching Japanese anime together, and join a Japanese↔️English language exchange.\n💰 Pass Holders: USD 10 / Non-pass Holders: USD 25",
           "actions": [
             {
               "text": "💸 Book Here",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-21-6pm-pizza-anime-night/"
+            },
+            {
+              "text": "🗾 Location",
+              "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
-          ]
+          ],
+          "startTime": "2025-10-21T18:00:00+09:00",
+          "endTime": "2025-10-21T20:00:00+09:00"
         }
       ]
     },
@@ -147,24 +168,32 @@
         {
           "time": "5:00 PM",
           "title": "Okonomiyaki Tech - Workshop (Pass Holders Only)",
-          "description": "💰 Pass Holders Only: Free",
+          "description": "Enjoy a beginner-friendly Vibe Coding workshop designed to spark your creativity.\n💰 Pass Holders Only: Free",
           "actions": [
             {
               "text": "💸 Book Here",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only%e3%80%91oct-23-5pm-okonomiyaki-tech-workshop/"
+            },
+            {
+              "text": "🗾 Location",
+              "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
-          ]
+          ],
+          "startTime": "2025-10-22T17:00:00+09:00",
+          "endTime": "2025-10-22T19:00:00+09:00"
         },
         {
           "time": "5:00 PM",
           "title": "Okonomiyaki Tech - Networking Dinner (Pass Holders Only)",
-          "description": "💰 Pass Holders Only: Free",
+          "description": "After the workshop, continue the conversation over Hiroshima-style okonomiyaki!\n\nPayment: Please pay in cash for what you order (one food & one drink minimum).\n\nA ¥400 table charge applies per person.\n💰 Pass Holders Only: Free",
           "actions": [
             {
               "text": "💸 Book Here",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only%e3%80%91oct-23-5pm-okonomiyaki-tech-networking-dinner/"
             }
-          ]
+          ],
+          "startTime": "2025-10-22T19:00:00+09:00",
+          "endTime": "2025-10-22T21:00:00+09:00"
         }
       ]
     },
@@ -172,13 +201,17 @@
       "date": "October 24 (Fri)",
       "events": [
         {
-          "time": "All Day",
+          "time": "Afternoon",
           "title": "Sake Brewery Tour (Pass Holders Only)",
           "description": "💰 Pass Holders Only: Free",
           "actions": [
             {
               "text": "💸 Book Here",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only%e3%80%91oct-24-sake-brewery-tour/"
+            },
+            {
+              "text": "🗾 Location",
+              "link": "https://share.google/zG4OdnBZgqLWom5cH"
             }
           ]
         }
@@ -190,24 +223,34 @@
         {
           "time": "Morning - Afternoon",
           "title": "Rabbit Island Day Trip (Ōkunoshima)",
-          "description": "💰 Pass Holders: Free / Non-pass Holders: USD 15",
+          "description": "Visit the island home to around 500 rabbits and feed them carrots.\nMeet at Hiroshima Station Bus Stop at 9:00 AM. Take the Kaguyahime Express Bus departing at 9:29 AM.💰 Pass Holders: Free / Non-pass Holders: USD 15",
           "actions": [
             {
               "text": "💸 Book Here",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-25-morning-afternoon-rabbit-island-day-trip-okunoshima/"
+            },
+            {
+              "text": "🗾 Location",
+              "link": "https://maps.app.goo.gl/ZWqxBrtiGWWeDw7B8"
             }
           ]
         },
         {
           "time": "8:00 PM",
           "title": "Live Music Karaoke (Pass Holders Only / Pay 3,500 JPY on site)",
-          "description": "💰 Pass Holders Only: Pay 3,500 JPY on site",
+          "description": "Experience live music karaoke and sing along like a pro.\nIncludes 3 drinks — additional drinks are cash-on (500 JPY each).\n💰 Pass Holders Only: Pay 3,500 JPY on site",
           "actions": [
             {
               "text": "💸 Book Here",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only-pay-on-site%e3%80%91oct-25-8pm-live-music-karaoke/"
+            },
+            {
+              "text": "🗾 Location",
+              "link": "https://share.google/6FveTV19ObGYziDA6"
             }
-          ]
+          ],
+          "startTime": "2025-10-25T20:00:00+09:00",
+          "endTime": "2025-10-25T22:00:00+09:00"
         }
       ]
     },

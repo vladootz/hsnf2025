@@ -1,34 +1,66 @@
 <template>
   <div class="min-h-screen bg-gray-900 text-gray-100">
-    <header class="bg-blue-700 text-white p-4">
+    <header class="bg-blue-950 text-white p-4">
       <div class="container mx-auto flex justify-between items-center flex-wrap gap-2">
-        <h1 class="text-2xl font-bold">Hiroshima Summit 2025</h1>
-        <div class="flex gap-2">
+        <h1 class="text-2xl font-bold">Hiroshima Setouchi Nomad Fest 2025</h1>
+        <div class="hidden md:flex gap-2">
           <button
             @click="showNowOnly = !showNowOnly"
             :class="['px-4 py-2 rounded', showNowOnly ? 'bg-green-600' : 'bg-blue-800 hover:bg-blue-700']"
           >
-            Now
+            {{ nowButtonText }}
           </button>
-          <div class="hidden md:flex gap-2">
-            <button
-              @click="columnsView = 3"
-              :class="['px-4 py-2 rounded', columnsView === 3 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
-            >
-              3 Columns
-            </button>
-            <button
-              @click="columnsView = 5"
-              :class="['px-4 py-2 rounded', columnsView === 5 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
-            >
-              5 Columns
-            </button>
-          </div>
+          <button
+            @click="columnsView = 3"
+            :class="['px-4 py-2 rounded', columnsView === 3 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
+          >
+            3 Columns
+          </button>
+          <button
+            @click="columnsView = 5"
+            :class="['px-4 py-2 rounded', columnsView === 5 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
+          >
+            5 Columns
+          </button>
+          <button
+            @click="toggleDemo"
+            :class="['px-4 py-2 rounded', demoMode ? 'bg-purple-600' : 'bg-blue-800 hover:bg-blue-700']"
+          >
+            Demo
+          </button>
         </div>
       </div>
     </header>
 
-    <main class="container mx-auto px-4 py-8">
+    <!-- Mobile bottom button bar -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-blue-700/95 backdrop-blur-sm p-3 flex gap-2 justify-end z-50" style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
+      <button
+        @click="showNowOnly = !showNowOnly"
+        :class="['px-3 py-2 rounded text-sm', showNowOnly ? 'bg-green-600' : 'bg-blue-800 hover:bg-blue-700']"
+      >
+        {{ nowButtonText }}
+      </button>
+      <button
+        @click="columnsView = 3"
+        :class="['px-3 py-2 rounded text-sm', columnsView === 3 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
+      >
+        3 Col
+      </button>
+      <button
+        @click="columnsView = 5"
+        :class="['px-3 py-2 rounded text-sm', columnsView === 5 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
+      >
+        5 Col
+      </button>
+      <button
+        @click="toggleDemo"
+        :class="['px-3 py-2 rounded text-sm', demoMode ? 'bg-purple-600' : 'bg-blue-800 hover:bg-blue-700']"
+      >
+        Demo
+      </button>
+    </div>
+
+    <main class="container mx-auto px-4 py-8 md:pb-8 pb-20">
       <div :class="['grid gap-6', showNowOnly ? 'grid-cols-1' : (columnsView === 3 ? 'md:grid-cols-3' : 'md:grid-cols-5'), 'grid-cols-1']">
         <div
           v-for="event in displayedEvents"
@@ -43,7 +75,34 @@
             </div>
 
             <div v-for="dailyEvent in event.events" :key="dailyEvent.time" class="mb-4">
-              <div class="bg-gray-800 p-4 rounded-lg h-full">
+              <TimeAware
+                v-if="dailyEvent.startTime && dailyEvent.endTime"
+                :start-time="dailyEvent.startTime"
+                :end-time="dailyEvent.endTime"
+              >
+                <div class="bg-gray-800 p-4 rounded-lg h-full event-card">
+                  <div>
+                    <p class="text-gray-400 text-sm">{{ dailyEvent.time }}</p>
+                    <h3 class="text-base font-semibold mt-2">
+                      {{ dailyEvent.title }}
+                    </h3>
+                    <p class="text-gray-400 text-xs mt-2 whitespace-pre-line">{{ dailyEvent.description }}</p>
+                  </div>
+
+                  <div class="mt-4 space-y-2 ">
+                    <a
+                      v-for="action in dailyEvent.actions"
+                      :key="action.text"
+                      :href="action.link"
+                      target="_blank"
+                      class="block w-full bg-gray-700 hover:bg-gray-600 text-gray-100 py-2 px-4 rounded transition-colors"
+                    >
+                      {{ action.text }}
+                    </a>
+                  </div>
+                </div>
+              </TimeAware>
+              <div v-else class="bg-gray-800 p-4 rounded-lg h-full">
                 <div>
                   <p class="text-gray-400 text-sm">{{ dailyEvent.time }}</p>
                   <h3 class="text-base font-semibold mt-2">{{ dailyEvent.title }}</h3>
@@ -90,14 +149,97 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import eventsData from './data/events.json'
+import TimeAware from './components/TimeAware.vue'
 
 export default {
+  components: {
+    TimeAware
+  },
   setup() {
     const events = ref(eventsData.events)
     const columnsView = ref(5)
     const showNowOnly = ref(false)
+    const currentTime = ref(new Date().getTime())
+    const demoMode = ref(false)
+    const demoDay = ref(null)
+
+    // Update current time every 2 seconds to keep button text reactive
+    let timeUpdateInterval = null
+    onMounted(() => {
+      timeUpdateInterval = setInterval(() => {
+        currentTime.value = new Date().getTime()
+      }, 2000)
+    })
+
+    onBeforeUnmount(() => {
+      if (timeUpdateInterval) {
+        clearInterval(timeUpdateInterval)
+      }
+    })
+
+    // Generate demo events function
+    const generateDemoEvents = () => {
+      const now = new Date()
+      const demoEvents = []
+
+      // Create 5 events, each 20 seconds long
+      for (let i = 0; i < 5; i++) {
+        const startTime = new Date(now.getTime() + i * 20000) // 20 seconds apart
+        const endTime = new Date(startTime.getTime() + 20000) // 20 seconds duration
+
+        const formatTime = (date) => {
+          return date.toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+          })
+        }
+
+        demoEvents.push({
+          time: formatTime(startTime),
+          title: `Demo Event ${i + 1}`,
+          description: `Testing time-aware functionality - 20 second duration\nStarts: ${formatTime(startTime)}\nEnds: ${formatTime(endTime)}`,
+          actions: [],
+          startTime: startTime.toISOString(),
+          endTime: endTime.toISOString()
+        })
+      }
+
+      return {
+        date: `Demo (${now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`,
+        events: demoEvents
+      }
+    }
+
+    // Toggle demo mode
+    const toggleDemo = () => {
+      demoMode.value = !demoMode.value
+      if (demoMode.value) {
+        demoDay.value = generateDemoEvents()
+      } else {
+        demoDay.value = null
+      }
+    }
+
+    // Check if any event is currently happening
+    const hasCurrentEvent = computed(() => {
+      const now = currentTime.value
+      return events.value.some(dayEvent =>
+        dayEvent.events.some(event => {
+          if (!event.startTime || !event.endTime) return false
+          const start = new Date(event.startTime).getTime()
+          const end = new Date(event.endTime).getTime()
+          return now >= start && now <= end
+        })
+      )
+    })
+
+    // Button text changes based on whether events have started
+    const nowButtonText = computed(() => {
+      return hasCurrentEvent.value ? 'Now' : 'First day'
+    })
 
     // Parse event date to compare with current date
     const parseEventDate = (dateString) => {
@@ -149,11 +291,18 @@ export default {
 
     // Computed property for displayed events
     const displayedEvents = computed(() => {
+      let eventsToShow = events.value
+
+      // Add demo day at the beginning if demo mode is active
+      if (demoMode.value && demoDay.value) {
+        eventsToShow = [demoDay.value, ...events.value]
+      }
+
       if (showNowOnly.value) {
         const currentDay = getCurrentOrFirstDay()
         return currentDay ? [currentDay] : []
       }
-      return events.value
+      return eventsToShow
     })
 
     // Check if a date is the current or first day
@@ -167,7 +316,10 @@ export default {
       columnsView,
       showNowOnly,
       displayedEvents,
-      isCurrentOrFirstDay
+      isCurrentOrFirstDay,
+      nowButtonText,
+      demoMode,
+      toggleDemo
     }
   }
 }
@@ -183,5 +335,75 @@ export default {
   background-color: rgba(55, 65, 81, 0.15);
   border-radius: 0.5rem;
   padding: 0.5rem;
+}
+
+/* Time-aware states */
+.time-aware-current .event-card {
+  background: linear-gradient(135deg, #1a2520 0%, #151b18 100%) !important;
+  border-left: 4px solid #4ade80;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.1);
+  position: relative;
+}
+
+.time-aware-current .event-card::before {
+  content: "LIVE NOW";
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: #4ade80;
+  color: #0f172a;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.time-aware-current .event-card h3 {
+  color: #86efac;
+}
+
+.time-aware-upcoming .event-card {
+  border-left: 4px solid #fbbf24;
+  background: linear-gradient(135deg, #2a2410 0%, #1a1a1a 100%) !important;
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
+}
+
+.time-aware-upcoming .event-card::before {
+  content: "UPCOMING";
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: #fbbf24;
+  color: #000;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.time-aware-past .event-card {
+  opacity: 0.5;
+  filter: grayscale(0.5);
+}
+
+.time-aware-past .event-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  border-radius: 0.5rem;
+}
+
+.event-card {
+  position: relative;
+  transition: all 0.3s ease;
 }
 </style>
