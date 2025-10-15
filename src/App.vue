@@ -2,31 +2,41 @@
   <div class="min-h-screen bg-gray-900 text-gray-100">
     <header class="bg-blue-950 text-white p-4">
       <div class="container mx-auto flex justify-between items-center flex-wrap gap-2">
-        <h1 class="text-xl font-bold">Hiroshima Setouchi Nomad Fest 2025</h1>
-        <div class="hidden md:flex gap-2">
+        <h1 class="text-xl font-bold">{{ t.title }}</h1>
+        <div class="flex gap-2 items-center">
+          <div class="hidden md:flex gap-2">
+            <button
+              @click="showNowOnly = !showNowOnly"
+              :class="['px-4 py-2 rounded', showNowOnly ? 'bg-green-600' : 'bg-blue-800 hover:bg-blue-700']"
+            >
+              {{ nowButtonText }}
+            </button>
+            <button
+              @click="columnsView = 3"
+              :class="['px-4 py-2 rounded', columnsView === 3 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
+            >
+              {{ t.columns3 }}
+            </button>
+            <button
+              @click="columnsView = 5"
+              :class="['px-4 py-2 rounded', columnsView === 5 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
+            >
+              {{ t.columns5 }}
+            </button>
+            <button
+              @click="toggleDemo"
+              :class="['px-4 py-2 rounded', demoMode ? 'bg-purple-600' : 'bg-blue-800 hover:bg-blue-700']"
+            >
+              {{ t.demo }}
+            </button>
+          </div>
+          <!-- Language Switcher -->
           <button
-            @click="showNowOnly = !showNowOnly"
-            :class="['px-4 py-2 rounded', showNowOnly ? 'bg-green-600' : 'bg-blue-800 hover:bg-blue-700']"
+            @click="toggleLanguage"
+            class="px-3 py-2 rounded bg-blue-800 hover:bg-blue-700 text-sm font-semibold"
+            :title="currentLanguage === 'en' ? 'Switch to Japanese' : '英語に切り替え'"
           >
-            {{ nowButtonText }}
-          </button>
-          <button
-            @click="columnsView = 3"
-            :class="['px-4 py-2 rounded', columnsView === 3 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
-          >
-            3 Columns
-          </button>
-          <button
-            @click="columnsView = 5"
-            :class="['px-4 py-2 rounded', columnsView === 5 ? 'bg-blue-600' : 'bg-blue-800 hover:bg-blue-700']"
-          >
-            5 Columns
-          </button>
-          <button
-            @click="toggleDemo"
-            :class="['px-4 py-2 rounded', demoMode ? 'bg-purple-600' : 'bg-blue-800 hover:bg-blue-700']"
-          >
-            Demo
+            {{ t.languageButton }}
           </button>
         </div>
       </div>
@@ -43,7 +53,7 @@
           v-show="buttonAlignment === 'right'"
           @click="toggleAlignment"
           class="arrow-btn absolute left-0 px-2 py-2 text-gray-300 hover:text-white text-xl"
-          aria-label="Move buttons left"
+          :aria-label="t.ariaLabels.moveLeft"
         >
           ←
         </button>
@@ -60,7 +70,7 @@
             @click="toggleDemo"
             :class="['px-3 py-2 rounded text-sm', demoMode ? 'bg-purple-600' : 'bg-blue-800 hover:bg-blue-700']"
           >
-            Demo
+            {{ t.demo }}
           </button>
         </div>
 
@@ -69,7 +79,7 @@
           v-show="buttonAlignment === 'left'"
           @click="toggleAlignment"
           class="arrow-btn absolute right-0 px-2 py-2 text-gray-300 hover:text-white text-xl"
-          aria-label="Move buttons right"
+          :aria-label="t.ariaLabels.moveRight"
         >
           →
         </button>
@@ -86,8 +96,8 @@
         >
           <div class="flex flex-col gap-4">
             <div class="text-center md:text-left">
-              <h2 class="text-xl font-bold mb-2">{{ event.date }}</h2>
-              <p v-if="event.registrationDeadline" class="text-gray-400 text-xs">Deadline: {{ event.registrationDeadline }}</p>
+              <h2 class="text-xl font-bold mb-2">{{ currentLanguage === 'ja' && event.date_ja ? event.date_ja : event.date }}</h2>
+              <p v-if="event.registrationDeadline" class="text-gray-400 text-xs">{{ t.deadline }}: {{ currentLanguage === 'ja' && event.registrationDeadline_ja ? event.registrationDeadline_ja : event.registrationDeadline }}</p>
             </div>
 
             <div v-for="dailyEvent in event.events" :key="dailyEvent.time" class="mb-4">
@@ -95,15 +105,16 @@
                 v-if="dailyEvent.startTime && dailyEvent.endTime"
                 :start-time="dailyEvent.startTime"
                 :end-time="dailyEvent.endTime"
+                :data-lang="currentLanguage"
                 @state-changed="handleStateChange($event, `${event.date}-${dailyEvent.time}`)"
               >
-                <div :ref="el => setEventRef(el, `${event.date}-${dailyEvent.time}`)" class="bg-gray-800 p-4 rounded-lg h-full event-card">
+                <div :ref="el => setEventRef(el, `${event.date}-${dailyEvent.time}`)" class="bg-gray-800 p-4 rounded-lg h-full event-card" :data-lang="currentLanguage">
                   <div>
                     <p class="text-gray-400 text-sm">{{ dailyEvent.time }}</p>
                     <h3 class="text-base font-semibold mt-2">
-                      {{ dailyEvent.title }}
+                      {{ currentLanguage === 'ja' && dailyEvent.title_ja ? dailyEvent.title_ja : dailyEvent.title }}
                     </h3>
-                    <p class="text-gray-400 text-xs mt-2 whitespace-pre-line">{{ dailyEvent.description }}</p>
+                    <p class="text-gray-400 text-xs mt-2 whitespace-pre-line">{{ currentLanguage === 'ja' && dailyEvent.description_ja ? dailyEvent.description_ja : dailyEvent.description }}</p>
                   </div>
 
                   <div class="mt-4 space-y-2 ">
@@ -114,7 +125,7 @@
                       target="_blank"
                       class="block w-full bg-gray-700 hover:bg-gray-600 text-gray-100 py-2 px-4 rounded transition-colors"
                     >
-                      {{ action.text }}
+                      {{ currentLanguage === 'ja' && action.text_ja ? action.text_ja : action.text }}
                     </a>
                   </div>
                 </div>
@@ -122,8 +133,8 @@
               <div v-else class="bg-gray-800 p-4 rounded-lg h-full">
                 <div>
                   <p class="text-gray-400 text-sm">{{ dailyEvent.time }}</p>
-                  <h3 class="text-base font-semibold mt-2">{{ dailyEvent.title }}</h3>
-                  <p class="text-gray-400 text-xs mt-2 whitespace-pre-line">{{ dailyEvent.description }}</p>
+                  <h3 class="text-base font-semibold mt-2">{{ currentLanguage === 'ja' && dailyEvent.title_ja ? dailyEvent.title_ja : dailyEvent.title }}</h3>
+                  <p class="text-gray-400 text-xs mt-2 whitespace-pre-line">{{ currentLanguage === 'ja' && dailyEvent.description_ja ? dailyEvent.description_ja : dailyEvent.description }}</p>
                 </div>
 
                 <div class="mt-4 space-y-2 ">
@@ -134,7 +145,7 @@
                     target="_blank"
                     class="block w-full bg-gray-700 hover:bg-gray-600 text-gray-100 py-2 px-4 rounded transition-colors"
                   >
-                    {{ action.text }}
+                    {{ currentLanguage === 'ja' && action.text_ja ? action.text_ja : action.text }}
                   </a>
                 </div>
               </div>
@@ -147,18 +158,18 @@
     <footer class="bg-gray-800 text-center py-6 px-4 pb-20">
       <div class="max-w-3xl mx-auto space-y-3">
         <p class="text-sm text-gray-400 font-semibold">
-          This page is generated by AI and is NOT affiliated with Hiroshima Setouchi Nomad Fest.
+          {{ t.footer.disclaimer }}
         </p>
         <p class="text-xs text-gray-400">
-          All content, event information, and imagery are copyright of their respective owners. This is an unofficial informational page.
+          {{ t.footer.copyright }}
         </p>
         <p class="text-sm text-gray-400">
-          Please check the official sources for up-to-date information:
-          <a href="https://digitalnomadshiroshima.com/hsnf2025/" target="_blank" class="text-blue-400 hover:underline">Hiroshima Setouchi Nomad Fest 2025</a>
-          and the event's WhatsApp group.
+          {{ t.footer.checkOfficial }}
+          <a href="https://digitalnomadshiroshima.com/hsnf2025/" target="_blank" class="text-blue-400 hover:underline">{{ t.footer.eventLink }}</a>
+          <template v-if="currentLanguage === 'en'">and the event's WhatsApp group.</template>
         </p>
         <p class="text-xs text-gray-500 pt-2 border-t border-gray-700">
-          Developed with Claude by <a href="https://websqu.ad" target="_blank" class="text-blue-400 hover:underline">websqu.ad</a>
+          {{ t.footer.developed }} <a href="https://websqu.ad" target="_blank" class="text-blue-400 hover:underline">websqu.ad</a>
         </p>
       </div>
     </footer>
@@ -166,7 +177,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import eventsData from './data/events.json'
 import TimeAware from './components/TimeAware.vue'
 
@@ -182,6 +193,72 @@ export default {
     const demoMode = ref(false)
     const demoDay = ref(null)
     const buttonAlignment = ref('right') // Default to right
+
+    // Language state with localStorage persistence
+    const currentLanguage = ref(localStorage.getItem('language') || 'en')
+
+    // Toggle language function
+    const toggleLanguage = () => {
+      currentLanguage.value = currentLanguage.value === 'en' ? 'ja' : 'en'
+      localStorage.setItem('language', currentLanguage.value)
+    }
+
+    // Translation objects
+    const translations = {
+      en: {
+        title: 'Hiroshima Setouchi Nomad Fest 2025',
+        firstDay: 'First day',
+        now: 'Now',
+        columns3: '3 Columns',
+        columns5: '5 Columns',
+        demo: 'Demo',
+        deadline: 'Deadline',
+        languageButton: 'JP',
+        footer: {
+          disclaimer: 'This page is generated by AI and is NOT affiliated with Hiroshima Setouchi Nomad Fest.',
+          copyright: 'All content, event information, and imagery are copyright of their respective owners. This is an unofficial informational page.',
+          checkOfficial: 'Please check the official sources for up-to-date information:',
+          eventLink: 'Hiroshima Setouchi Nomad Fest 2025',
+          developed: 'Developed with Claude by'
+        },
+        badges: {
+          liveNow: 'LIVE NOW',
+          upcoming: 'UPCOMING'
+        },
+        ariaLabels: {
+          moveLeft: 'Move buttons left',
+          moveRight: 'Move buttons right'
+        }
+      },
+      ja: {
+        title: '広島瀬戸内ノマドフェス 2025',
+        firstDay: '初日',
+        now: '現在',
+        columns3: '3列',
+        columns5: '5列',
+        demo: 'デモ',
+        deadline: '締切',
+        languageButton: 'EN',
+        footer: {
+          disclaimer: 'このページはAIによって生成されており、広島瀬戸内ノマドフェストとは関係ありません。',
+          copyright: 'すべてのコンテンツ、イベント情報、画像はそれぞれの所有者の著作権に帰属します。これは非公式の情報ページです。',
+          checkOfficial: '最新情報は公式ソースをご確認ください：',
+          eventLink: '広島瀬戸内ノマドフェス 2025',
+          developed: 'Claude と websqu.ad により開発'
+        },
+        badges: {
+          liveNow: 'ライブ中',
+          upcoming: 'まもなく'
+        },
+        ariaLabels: {
+          moveLeft: 'ボタンを左に移動',
+          moveRight: 'ボタンを右に移動'
+        }
+      }
+    }
+
+    // Translation helper
+    const t = computed(() => translations[currentLanguage.value])
 
     // Track event refs for scrolling
     const eventRefs = new Map()
@@ -249,6 +326,12 @@ export default {
       buttonAlignment.value = buttonAlignment.value === 'right' ? 'left' : 'right'
     }
 
+    // Watch for language changes and update HTML lang attribute and page title
+    watch(currentLanguage, (newLang) => {
+      document.documentElement.lang = newLang
+      document.title = t.value.title
+    }, { immediate: true })
+
     onMounted(() => {
       timeUpdateInterval = setInterval(() => {
         currentTime.value = new Date().getTime()
@@ -287,15 +370,21 @@ export default {
         demoEvents.push({
           time: formatTime(startTime),
           title: `Demo Event ${i + 1}`,
+          title_ja: `デモイベント ${i + 1}`,
           description: `Testing time-aware functionality - 20 second duration\nStarts: ${formatTime(startTime)}\nEnds: ${formatTime(endTime)}`,
+          description_ja: `時間認識機能のテスト - 20秒間\n開始: ${formatTime(startTime)}\n終了: ${formatTime(endTime)}`,
           actions: [],
           startTime: startTime.toISOString(),
           endTime: endTime.toISOString()
         })
       }
 
+      const dateLabel = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+      const dateLabelJa = now.toLocaleDateString('ja-JP', { month: 'long', day: 'numeric' })
+
       return {
-        date: `Demo (${now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`,
+        date: `Demo (${dateLabel})`,
+        date_ja: `デモ (${dateLabelJa})`,
         events: demoEvents
       }
     }
@@ -326,7 +415,7 @@ export default {
 
     // Button text changes based on whether events have started
     const nowButtonText = computed(() => {
-      return hasCurrentEvent.value ? 'Now' : 'First day'
+      return hasCurrentEvent.value ? t.value.now : t.value.firstDay
     })
 
     // Parse event date to compare with current date
@@ -411,7 +500,10 @@ export default {
       buttonAlignment,
       toggleAlignment,
       setEventRef,
-      handleStateChange
+      handleStateChange,
+      currentLanguage,
+      toggleLanguage,
+      t
     }
   }
 }
@@ -455,6 +547,10 @@ html {
   letter-spacing: 0.5px;
 }
 
+.time-aware-current .event-card[data-lang="ja"]::before {
+  content: "ライブ中";
+}
+
 .time-aware-current .event-card h3 {
   color: #86efac;
 }
@@ -478,6 +574,10 @@ html {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.time-aware-upcoming .event-card[data-lang="ja"]::before {
+  content: "まもなく";
 }
 
 .time-aware-past .event-card {

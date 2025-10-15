@@ -2,11 +2,16 @@
   "events": [
     {
       "date": "October 18 (Sat)",
+      "date_ja": "10月18日（土）",
+      "registrationDeadline": "October 16 (Thu)",
+      "registrationDeadline_ja": "10月16日（木）",
       "events": [
         {
           "time": "1:00 PM",
           "title": "Community Lunch (No registration required)",
+          "title_ja": "コミュニティランチ（登録不要）",
           "description": "If you arrive in Hiroshima early, come to co-ba hiroshima, drop off your luggage, and join us for lunch!",
+          "description_ja": "広島に早く到着された方は、co-ba hiroshimaで荷物を預けて、一緒にランチを楽しみましょう！",
           "actions": [],
           "startTime": "2025-10-18T13:00:00+09:00",
           "endTime": "2025-10-18T15:00:00+09:00"
@@ -14,14 +19,18 @@
         {
           "time": "3:00 PM",
           "title": "Check-in & Registration (Pass Holders Only)",
+          "title_ja": "チェックイン＆登録（パスホルダーのみ）",
           "description": "Collect your name tag. Keep it with you during the event for coworking access. Inform staff if you cannot participate.\n🗾 co-ba hiroshima\n💰 Pass Holders Only: Free",
+          "description_ja": "名札を受け取ります。イベント期間中はコワーキング利用のために常に携帯してください。参加できない場合はスタッフにお知らせください。\n🗾 co-ba hiroshima\n💰 パスホルダーのみ：無料",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/registration/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
           ],
@@ -31,14 +40,18 @@
         {
           "time": "4:00 PM",
           "title": "Orientation & Family Meeting (Pass Holders Only)",
+          "title_ja": "オリエンテーション＆交流会（パスホルダーのみ）",
           "description": "Introductions, icebreakers, schedule overview, activity discussion, and 2-minute pitches.\n🗾 co-ba hiroshima\n💰 Pass Holders Only: Free",
+          "description_ja": "自己紹介、アイスブレイク、スケジュール説明、アクティビティ紹介、2分間ピッチ。\n🗾 co-ba hiroshima\n💰 パスホルダーのみ：無料",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-18-4pm-orientation-family-meeting/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://maps.app.goo.gl/Drkriw3mjsyRv2p29"
             }
           ],
@@ -48,37 +61,47 @@
         {
           "time": "6:30 PM",
           "title": "Welcome Dinner",
+          "title_ja": "ウェルカムディナー",
           "description": "Connect and socialize with other participants. Course with all-you-can-drink option.\n\n🗾 Carp-dori Nakanotana Stadium (カープ鳥 中の棚スタジアム店)\n\n💰 Pass Holders: USD 35 / Non-pass Holders: USD 50",
+          "description_ja": "参加者同士で交流しましょう。飲み放題付きコース料理。\n\n🗾 カープ鳥 中の棚スタジアム店\n\n💰 パスホルダー：35ドル / 非パスホルダー：50ドル",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-18-630pm-welcome-dinner/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/NEKClY40TB9e5JIcy"
             }
           ],
           "startTime": "2025-10-18T18:30:00+09:00",
           "endTime": "2025-10-18T20:30:00+09:00"
         }
-      ],
-      "registrationDeadline": "October 16 (Thu)"
+      ]
     },
     {
       "date": "October 19 (Sun)",
+      "date_ja": "10月19日（日）",
+      "registrationDeadline": "October 17 (Fri)",
+      "registrationDeadline_ja": "10月17日（金）",
       "events": [
         {
           "time": "Morning",
           "title": "Miyajima Misen Hike",
+          "title_ja": "宮島弥山ハイキング",
           "description": "Autumn is the best season for hiking in Japan! Climb Mt. Misen in Miyajima, a World Heritage site, and enjoy views of the Seto Inland Sea. Postponed to next week in case of rain.\n🕘 When/Where: 10:00–13:00 @ Mount Misen, Miyajima\n🗾 Meeting Point: 9:40 Miyajimaguchi / 10:00 Miyajima Pier\n💰 Pass Holders: Free / Non-pass Holders: USD 15 (participants pay own transportation, ropeway, and admission fees)",
+          "description_ja": "日本の秋はハイキングに最適な季節です！世界遺産の宮島・弥山に登り、瀬戸内海の景色を楽しみましょう。雨天の場合は翌週に延期。\n🕘 時間・場所：10:00〜13:00 @ 宮島弥山\n🗾 集合場所：9:40 宮島口 / 10:00 宮島桟橋\n💰 パスホルダー：無料 / 非パスホルダー：15ドル（交通費、ロープウェイ、入場料は各自負担）",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-19-morning-miyajima-misen-hike/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://maps.app.goo.gl/upsM8vhXYUuA5C3MA"
             }
           ]
@@ -86,35 +109,43 @@
         {
           "time": "1:00 PM",
           "title": "Hiroshima Wagyu BBQ",
+          "title_ja": "広島和牛BBQ",
           "description": "Community lunch in Miyajima. Postponed to next week in case of rain.\n🗾 Miyajima Tonboan (宮島とんぼ庵)\n💰 Pass Holders: USD 25 / Non-pass Holders: USD 40",
+          "description_ja": "宮島でコミュニティランチ。雨天の場合は翌週に延期。\n🗾 宮島とんぼ庵\n💰 パスホルダー：25ドル / 非パスホルダー：40ドル",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-19-1pm-hiroshima-wagyu-bbq/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/j6hVTbQtBwasqXDup"
             }
           ]
         }
-      ],
-      "registrationDeadline": "October 17 (Fri)"
+      ]
     },
     {
       "date": "October 20 (Mon)",
+      "date_ja": "10月20日（月）",
       "events": [
         {
           "time": "6:30 PM",
           "title": "New Moon Yoga (Pass Holders Only)",
+          "title_ja": "新月ヨガ（パスホルダーのみ）",
           "description": "💰 Pass Holders Only: Free",
+          "description_ja": "💰 パスホルダーのみ：無料",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only%e3%80%91oct-20-630pm-new-moon-yoga/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
           ],
@@ -125,18 +156,23 @@
     },
     {
       "date": "October 21 (Tue)",
+      "date_ja": "10月21日（火）",
       "events": [
         {
           "time": "4:00 PM",
           "title": "Bianca's Workshop",
+          "title_ja": "ビアンカのワークショップ",
           "description": "💰 Pass Holders: Free / Non-pass Holders: USD 15",
+          "description_ja": "💰 パスホルダー：無料 / 非パスホルダー：15ドル",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-21-4pm-biancas-workshop/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
           ],
@@ -146,14 +182,18 @@
         {
           "time": "6:00 PM",
           "title": "Pizza & Anime Night",
+          "title_ja": "ピザ＆アニメナイト",
           "description": "Enjoy pizza while watching Japanese anime together, and join a Japanese↔️English language exchange.\n💰 Pass Holders: USD 10 / Non-pass Holders: USD 25",
+          "description_ja": "ピザを食べながら日本のアニメを一緒に見て、日本語↔️英語の言語交換に参加しましょう。\n💰 パスホルダー：10ドル / 非パスホルダー：25ドル",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-21-6pm-pizza-anime-night/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
           ],
@@ -164,18 +204,23 @@
     },
     {
       "date": "October 22 (Wed)",
+      "date_ja": "10月22日（水）",
       "events": [
         {
           "time": "5:00 PM",
           "title": "Okonomiyaki Tech - Workshop (Pass Holders Only)",
+          "title_ja": "お好み焼きテック - ワークショップ（パスホルダーのみ）",
           "description": "Enjoy a beginner-friendly Vibe Coding workshop designed to spark your creativity.\n💰 Pass Holders Only: Free",
+          "description_ja": "創造性を刺激する初心者向けのバイブコーディングワークショップをお楽しみください。\n💰 パスホルダーのみ：無料",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only%e3%80%91oct-23-5pm-okonomiyaki-tech-workshop/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/pOrqvA8lPIGxuGkDH"
             }
           ],
@@ -185,10 +230,13 @@
         {
           "time": "5:00 PM",
           "title": "Okonomiyaki Tech - Networking Dinner (Pass Holders Only)",
+          "title_ja": "お好み焼きテック - ネットワーキングディナー（パスホルダーのみ）",
           "description": "After the workshop, continue the conversation over Hiroshima-style okonomiyaki!\n\nPayment: Please pay in cash for what you order (one food & one drink minimum).\n\nA ¥400 table charge applies per person.\n💰 Pass Holders Only: Free",
+          "description_ja": "ワークショップの後は、広島風お好み焼きを食べながら会話を続けましょう！\n\n支払い：注文したものは現金でお支払いください（1品＋1ドリンク最低注文）。\n\nお一人様400円のテーブルチャージがかかります。\n💰 パスホルダーのみ：無料",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only%e3%80%91oct-23-5pm-okonomiyaki-tech-networking-dinner/"
             }
           ],
@@ -199,18 +247,23 @@
     },
     {
       "date": "October 24 (Fri)",
+      "date_ja": "10月24日（金）",
       "events": [
         {
           "time": "Afternoon",
           "title": "Sake Brewery Tour (Pass Holders Only)",
+          "title_ja": "酒蔵ツアー（パスホルダーのみ）",
           "description": "💰 Pass Holders Only: Free",
+          "description_ja": "💰 パスホルダーのみ：無料",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only%e3%80%91oct-24-sake-brewery-tour/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/zG4OdnBZgqLWom5cH"
             }
           ]
@@ -219,18 +272,23 @@
     },
     {
       "date": "October 25 (Sat)",
+      "date_ja": "10月25日（土）",
       "events": [
         {
           "time": "Morning - Afternoon",
           "title": "Rabbit Island Day Trip (Ōkunoshima)",
+          "title_ja": "うさぎ島日帰りツアー（大久野島）",
           "description": "Visit the island home to around 500 rabbits and feed them carrots.\nMeet at Hiroshima Station Bus Stop at 9:00 AM. Take the Kaguyahime Express Bus departing at 9:29 AM.💰 Pass Holders: Free / Non-pass Holders: USD 15",
+          "description_ja": "約500羽のうさぎが住む島を訪れて、にんじんをあげましょう。\n広島駅バス停に9:00AMに集合。9:29AM発のかぐやひめエクスプレスバスに乗車します。💰 パスホルダー：無料 / 非パスホルダー：15ドル",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-25-morning-afternoon-rabbit-island-day-trip-okunoshima/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://maps.app.goo.gl/ZWqxBrtiGWWeDw7B8"
             }
           ]
@@ -238,14 +296,18 @@
         {
           "time": "8:00 PM",
           "title": "Live Music Karaoke (Pass Holders Only / Pay 3,500 JPY on site)",
+          "title_ja": "生演奏カラオケ（パスホルダーのみ / 現地で3,500円支払い）",
           "description": "Experience live music karaoke and sing along like a pro.\nIncludes 3 drinks — additional drinks are cash-on (500 JPY each).\n💰 Pass Holders Only: Pay 3,500 JPY on site",
+          "description_ja": "生演奏カラオケを体験して、プロのように歌いましょう。\n3ドリンク込み — 追加ドリンクは現金払い（各500円）。\n💰 パスホルダーのみ：現地で3,500円支払い",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/%e3%80%90pass-holders-only-pay-on-site%e3%80%91oct-25-8pm-live-music-karaoke/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://share.google/6FveTV19ObGYziDA6"
             }
           ],
@@ -256,18 +318,23 @@
     },
     {
       "date": "October 26 (Sun)",
+      "date_ja": "10月26日（日）",
       "events": [
         {
           "time": "Morning - Afternoon",
           "title": "Sandankyo Gorge Tour",
+          "title_ja": "三段峡ツアー",
           "description": "Explore Sandankyo Gorge, a nationally designated scenic spot. If it rains, we will do the Miyajima Misen hike instead.\n🕘 Meet at 8:00 AM at Yokogawa Station (Bus departs 8:23 AM)\n💰 Pass Holders: Free / Non-pass Holders: USD 15",
+          "description_ja": "国の特別名勝に指定されている三段峡を探索します。雨天の場合は、宮島弥山ハイキングを実施します。\n🕘 横川駅に8:00AMに集合（バスは8:23AM出発）\n💰 パスホルダー：無料 / 非パスホルダー：15ドル",
           "actions": [
             {
               "text": "💸 Book Here",
+              "text_ja": "💸 予約する",
               "link": "https://digitalnomadshiroshima.com/hsnf2025/product/oct-26-morning-afternoon-sandankyo-gorge-tour/"
             },
             {
               "text": "🗾 Location",
+              "text_ja": "🗾 場所",
               "link": "https://maps.app.goo.gl/7Mqv7RytpZWYAmZJ8"
             }
           ]
