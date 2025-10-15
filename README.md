@@ -18,7 +18,7 @@ An interactive event calendar for the Hiroshima Setouchi Nomad Fest 2025, featur
 
 ### 🎮 Interactive Controls
 - **First day/Now**: Toggle between showing all days or just the current day
-- **3/5 Columns**: Desktop view options for multi-column layout
+- **3/5 Days**: Desktop view options for multi-column layout
 - **Demo Mode**: Generate 5 test events (20-second intervals) for testing
 
 ### 🎨 Modern UI
