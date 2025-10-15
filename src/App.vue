@@ -164,7 +164,7 @@ export default {
     const handleOrientation = (event) => {
       // gamma is the left-to-right tilt in degrees (-90 to 90)
       // Negative = tilted left, Positive = tilted right
-      const tiltThreshold = 15 // Degrees threshold to avoid jitter
+      const tiltThreshold = 10 // Degrees threshold to avoid jitter
 
       if (event.gamma !== null) {
         if (event.gamma < -tiltThreshold) {
