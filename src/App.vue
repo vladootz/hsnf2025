@@ -192,7 +192,7 @@ export default {
     const currentTime = ref(new Date().getTime())
     const demoMode = ref(false)
     const demoDay = ref(null)
-    const buttonAlignment = ref('right') // Default to right
+    const buttonAlignment = ref(localStorage.getItem('buttonAlignment') || 'right') // Default to right
 
     // Language state with localStorage persistence
     const currentLanguage = ref(localStorage.getItem('language') || 'en')
@@ -324,6 +324,7 @@ export default {
     // Toggle button alignment between left and right
     const toggleAlignment = () => {
       buttonAlignment.value = buttonAlignment.value === 'right' ? 'left' : 'right'
+      localStorage.setItem('buttonAlignment', buttonAlignment.value)
     }
 
     // Watch for language changes and update HTML lang attribute and page title
