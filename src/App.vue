@@ -95,8 +95,9 @@
                 v-if="dailyEvent.startTime && dailyEvent.endTime"
                 :start-time="dailyEvent.startTime"
                 :end-time="dailyEvent.endTime"
+                @state-changed="handleStateChange($event, `${event.date}-${dailyEvent.time}`)"
               >
-                <div class="bg-gray-800 p-4 rounded-lg h-full event-card">
+                <div :ref="el => setEventRef(el, `${event.date}-${dailyEvent.time}`)" class="bg-gray-800 p-4 rounded-lg h-full event-card">
                   <div>
                     <p class="text-gray-400 text-sm">{{ dailyEvent.time }}</p>
                     <h3 class="text-base font-semibold mt-2">
@@ -182,8 +183,66 @@ export default {
     const demoDay = ref(null)
     const buttonAlignment = ref('right') // Default to right
 
+    // Track event refs for scrolling
+    const eventRefs = new Map()
+
     // Update current time every 2 seconds to keep button text reactive
     let timeUpdateInterval = null
+
+    // Set event ref for tracking
+    const setEventRef = (el, key) => {
+      if (el) {
+        eventRefs.set(key, el)
+      } else {
+        eventRefs.delete(key)
+      }
+    }
+
+    // Scroll to event smoothly, centered in viewport
+    const scrollToEvent = (eventKey) => {
+      const element = eventRefs.get(eventKey)
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        })
+      }
+    }
+
+    // Handle state change from TimeAware component
+    const handleStateChange = (event, eventKey) => {
+      if (event.state === 'current') {
+        // Add a small delay to ensure DOM is ready
+        setTimeout(() => {
+          scrollToEvent(eventKey)
+        }, 100)
+      }
+    }
+
+    // Check for current events on mount and scroll to first one
+    const scrollToCurrentEventOnLoad = () => {
+      const now = new Date().getTime()
+
+      // Check all events (including demo events if active)
+      const eventsToCheck = demoMode.value && demoDay.value
+        ? [demoDay.value, ...events.value]
+        : events.value
+
+      for (const dayEvent of eventsToCheck) {
+        for (const event of dayEvent.events) {
+          if (event.startTime && event.endTime) {
+            const start = new Date(event.startTime).getTime()
+            const end = new Date(event.endTime).getTime()
+
+            if (now >= start && now <= end) {
+              const eventKey = `${dayEvent.date}-${event.time}`
+              scrollToEvent(eventKey)
+              return // Only scroll to first current event
+            }
+          }
+        }
+      }
+    }
 
     // Toggle button alignment between left and right
     const toggleAlignment = () => {
@@ -194,6 +253,11 @@ export default {
       timeUpdateInterval = setInterval(() => {
         currentTime.value = new Date().getTime()
       }, 2000)
+
+      // Scroll to current event on initial load (with delay for DOM rendering)
+      setTimeout(() => {
+        scrollToCurrentEventOnLoad()
+      }, 200)
     })
 
     onBeforeUnmount(() => {
@@ -345,7 +409,9 @@ export default {
       demoMode,
       toggleDemo,
       buttonAlignment,
-      toggleAlignment
+      toggleAlignment,
+      setEventRef,
+      handleStateChange
     }
   }
 }
