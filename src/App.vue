@@ -1,9 +1,9 @@
 <template>
   <div class="min-h-screen bg-gray-900 text-gray-100">
     <header class="bg-blue-950 text-white p-4">
-      <div class="container mx-auto flex justify-between items-center flex-wrap gap-2">
+      <div class="container mx-auto flex justify-between items-center flex-nowrap gap-2">
         <h1 class="text-xl font-bold">{{ t.title }}</h1>
-        <div class="flex gap-2 items-center">
+        <div class="flex gap-2 items-center self-start">
           <div class="hidden md:flex gap-2">
             <button
               @click="showNowOnly = !showNowOnly"
